@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Clock, MapPin, Navigation, Quote, Star, Expand } from "lucide-react";
 
 import heroImg from "@/assets/hero.jpg";
+import heroVideo from "@/assets/snapinsta-1789008038249.mp4";
 import fabioImg from "@/assets/barber-fabio.jpg";
 import vitinhoImg from "@/assets/barber-vitinho.jpg";
 import g1 from "@/assets/gallery-1.jpg";
@@ -82,14 +83,25 @@ function SectionHeading({
 export function Hero() {
   return (
     <section id="top" className="relative isolate min-h-[100svh] overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Interior escuro e elegante da Fabin Barber Shop"
-        width={1600}
-        height={1200}
+      {/* Vídeo de fundo em loop silencioso */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster={heroImg}
+        aria-hidden="true"
         className="absolute inset-0 size-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/70 to-ink" />
+      >
+        <source src={heroVideo} type="video/mp4" />
+        {/* Fallback para browsers sem suporte a vídeo */}
+        <img
+          src={heroImg}
+          alt="Interior da Fabin Barber Shop"
+          className="absolute inset-0 size-full object-cover"
+        />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/65 to-ink" />
 
       <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pb-20 pt-32">
         <div className="flex flex-wrap items-center gap-2">
