@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Clock, MapPin, Navigation, Quote, Star, Expand } from "lucide-react";
 
 import heroImg from "@/assets/hero.jpg";
@@ -83,12 +83,13 @@ function SectionHeading({
 export function Hero() {
   return (
     <section id="top" className="relative isolate min-h-[100svh] overflow-hidden">
-      {/* Vídeo de fundo em loop silencioso */}
+      {/* Vídeo de fundo em loop silencioso com carregamento otimizado */}
       <video
         autoPlay
         loop
         muted
         playsInline
+        preload="metadata"
         poster={heroImg}
         aria-hidden="true"
         className="absolute inset-0 size-full object-cover"
@@ -98,6 +99,10 @@ export function Hero() {
         <img
           src={heroImg}
           alt="Interior da Fabin Barber Shop"
+          width={1280}
+          height={720}
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 size-full object-cover"
         />
       </video>
@@ -170,6 +175,7 @@ export function Sobre() {
               width={900}
               height={900}
               loading="lazy"
+              decoding="async"
               className="aspect-[4/5] w-full object-cover"
             />
             <div className="absolute -bottom-6 -right-2 border border-gold/50 bg-ink px-6 py-4 text-center sm:right-6">
@@ -249,6 +255,7 @@ export function Time() {
                     width={912}
                     height={1104}
                     loading="lazy"
+                    decoding="async"
                     className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {b.id === "fabio" ? (
@@ -401,6 +408,7 @@ export function Galeria() {
                   width={900}
                   height={900}
                   loading="lazy"
+                  decoding="async"
                   className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* Overlay with expand icon on hover */}
@@ -525,17 +533,42 @@ export function Local() {
           </FadeIn>
 
           <FadeIn delay={100} className="min-h-[340px] overflow-hidden border border-border/70">
-            <iframe
-              title="Mapa da Fabin Barber Shop"
-              src={MAPS_EMBED}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="size-full min-h-[340px] w-full grayscale-[0.4] contrast-[1.1]"
-            />
+            <LazyMap />
           </FadeIn>
         </div>
       </div>
     </section>
+  );
+}
+
+function LazyMap() {
+  const { ref, inView } = useInView({ threshold: 0.05 });
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    if (inView) setShouldLoad(true);
+  }, [inView]);
+
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className="relative flex size-full min-h-[340px] items-center justify-center bg-card/60"
+    >
+      {shouldLoad ? (
+        <iframe
+          title="Mapa da Fabin Barber Shop"
+          src={MAPS_EMBED}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="size-full min-h-[340px] w-full border-0 grayscale-[0.4] contrast-[1.1]"
+        />
+      ) : (
+        <div className="flex flex-col items-center gap-2 text-muted-foreground">
+          <MapPin className="size-6 animate-pulse text-gold" />
+          <span className="text-xs uppercase tracking-wider">Carregando mapa...</span>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -40,6 +40,9 @@ export function Header() {
           <img
             src={logoPng}
             alt="Logo Fabin Barber Shop"
+            width={44}
+            height={44}
+            decoding="async"
             className="size-11 rounded-full object-cover border border-gold/60 bg-ink shadow-[0_0_12px_rgba(212,175,55,0.25)]"
           />
           <span className="min-w-0 leading-none">
@@ -152,7 +155,7 @@ export function WhatsAppFab() {
   return (
     <a
       href={whatsappLink(
-        "Olá, Fabin Barber Shop! Vim pelo site e gostaria de tirar uma dúvida sobre o atendimento.",
+        "Oi! Vi o site de vocês e queria saber como tá o movimento!",
       )}
       target="_blank"
       rel="noopener noreferrer"
@@ -175,6 +178,9 @@ export function Footer() {
               <img
                 src={logoPng}
                 alt="Logo Fabin Barber Shop"
+                width={48}
+                height={48}
+                decoding="async"
                 className="size-12 rounded-full object-cover border border-gold/60 bg-ink shadow-md"
               />
               <div>
