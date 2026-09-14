@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
 import { Footer, Header, WhatsAppFab } from "@/components/site/chrome";
 import {
@@ -11,6 +12,7 @@ import {
   Sobre,
   Time,
 } from "@/components/site/sections";
+import { SplashScreen } from "@/components/site/SplashScreen";
 
 const title = "Fabin Barber Shop | Barbearia no Del Lago (Ordem de Chegada)";
 const description =
@@ -82,8 +84,13 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [splashDone, setSplashDone] = useState(false);
+
   return (
     <>
+      {/* Splash overlay — sits above everything, removed after animation */}
+      {!splashDone && <SplashScreen onComplete={() => setSplashDone(true)} />}
+
       <Header />
       <main>
         <Hero />
