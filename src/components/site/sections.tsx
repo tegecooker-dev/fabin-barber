@@ -105,18 +105,18 @@ export function Hero() {
 
       <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pb-20 pt-32">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-eyebrow">Del Lago · Since 2022</span>
+          <span className="text-eyebrow">Del Lago · Itapoã</span>
           <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-widest text-gold">
-            Ordem de Chegada
+            Sem agendamento
           </span>
         </div>
         <h1 className="mt-5 max-w-3xl font-display text-[3.25rem] leading-[0.92] text-foreground sm:text-7xl lg:text-8xl">
-          ESTILO NÃO SE IMPROVISA.
-          <span className="gold-text block">SE ESCULPE.</span>
+          CABELO BOM
+          <span className="gold-text block">NÃO ESPERA.</span>
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Cortes precisos, barba trabalhada na navalha e um ambiente de respeito no Del Lago.
-          Atendimento prático e ágil por ordem de chegada — é só chegar e sentar na cadeira.
+          Sem agenda, sem app. Você chega, escolhe seu barbeiro e senta na cadeira.
+          Fabin Barber no Del Lago — desde 2022 do mesmo jeito: serviço de qualidade e sem enrolação.
         </p>
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -124,17 +124,17 @@ export function Hero() {
             href="#local"
             className="inline-flex items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold-soft via-gold to-copper px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground transition-opacity hover:opacity-90"
           >
-            <Navigation className="size-4" /> Como Chegar
+            <Navigation className="size-4" /> Ver no Maps
           </a>
           <a
             href={whatsappLink(
-              "Olá! Vim pelo site da Fabin Barber Shop e gostaria de saber como está o movimento/fila agora.",
+              "Oi! Tô querendo ir aí hoje, como tá o movimento?",
             )}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-sm border border-border px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition-colors hover:border-gold hover:text-gold"
           >
-            <WhatsAppIcon className="size-4" /> Consultar Fila no WhatsApp
+            <WhatsAppIcon className="size-4" /> Ver movimento no Zap
           </a>
         </div>
 
@@ -185,27 +185,26 @@ export function Sobre() {
           <div>
             <SectionHeading
               eyebrow="Sobre nós"
-              title="CONHEÇA A FABIN BARBER SHOP"
+              title="A FABIN É ASSIM"
               center={false}
             />
             <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
               <p>
-                Nascemos em 2022 com uma ideia simples e exigente: entregar o padrão da barbearia
-                clássica com a precisão da técnica moderna. Cada cliente é atendido com tempo,
-                conversa e atenção — nunca no automático.
+                O Fábio abriu a barbearia no Del Lago em 2022 com uma ideia clara: fazer direito ou
+                não fazer. Nada de pressa, nada de descuido. Cada atendimento é tratado como se
+                fosse o único do dia.
               </p>
               <p>
-                Nosso modelo é 100% focado na praticidade do seu dia a dia: sem complicação de
-                agendamentos prévios. Você chega no seu tempo, é recebido em um ambiente climatizado e
-                sai com a régua máxima no cabelo e na barba.
+                A casa é simples, o ar-condicionado tá sempre ligado e não precisa marcar hora.
+                Chegou, esperou um pouquinho (às vezes nem isso) e saiu diferente.
               </p>
             </div>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {[
-                "Atendimento por ordem de chegada",
-                "Barbeiros especializados",
-                "Produtos premium",
-                "Ambiente climatizado",
+                "Sem agendamento prévio",
+                "Fábio & Vitinho no comando",
+                "Produtos de qualidade",
+                "Climatizado e confortável",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-foreground">
                   <span className="mt-1.5 size-1.5 shrink-0 bg-gold" />
@@ -229,9 +228,9 @@ export function Time() {
     <section id="time" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeading
-          eyebrow="Nosso time"
-          title="MÃOS QUE FAZEM A DIFERENÇA"
-          subtitle="Profissionais dedicados ao seu visual. Atendimento por ordem de chegada com o barbeiro da sua escolha."
+          eyebrow="O time"
+          title="QUEM FAZ ACONTECER"
+          subtitle="Dois barbeiros, um padrão: não sai daqui feio. Chega e escolhe com quem prefere."
         />
 
         {/* 2 colunas centradas para os 2 barbeiros */}
@@ -315,9 +314,9 @@ export function Servicos() {
     <section id="servicos" className="bg-graphite/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeading
-          eyebrow="Nossos serviços"
-          title="O CUIDADO COMPLETO"
-          subtitle="Preços justos, tempo respeitado e acabamento impecável. Atendimento prático por ordem de chegada."
+          eyebrow="O que a gente faz"
+          title="SERVIÇOS E PREÇOS"
+          subtitle="Sem letra miúda. O que você vê aqui é o que você paga."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2">
@@ -380,8 +379,8 @@ export function Galeria() {
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeading
           eyebrow="Galeria"
-          title="NOSSO TRABALHO"
-          subtitle="Cortes, barbas e o ambiente que já virou ponto de encontro no Del Lago."
+          title="O QUE SAI DAQUI"
+          subtitle="Alguns trabalhos do dia a dia. O que você vê é o que você vai pedir."
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
           {galleryPhotos.map((p, i) => (
@@ -434,8 +433,8 @@ export function Avaliacoes() {
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeading
           eyebrow="Avaliações"
-          title="O QUE NOSSOS CLIENTES DIZEM"
-          subtitle="Confiança construída cadeira por cadeira, atendimento por atendimento."
+          title="O QUE FALAM DA GENTE"
+          subtitle="Sem filtro. São os próprios clientes."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2">
@@ -556,13 +555,13 @@ export function CtaFinal() {
       <div className="absolute inset-0 bg-ink/85" />
       <div className="relative mx-auto max-w-3xl px-5 py-20 text-center sm:py-28">
         <FadeIn>
-          <span className="text-eyebrow">Sua próxima visita</span>
+          <span className="text-eyebrow">Bora?</span>
           <h2 className="mt-4 font-display text-4xl leading-none text-foreground sm:text-6xl">
-            PRONTO PARA O SEU MELHOR VISUAL?
+            É SÓ CHEGAR.
           </h2>
           <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-            Atendimento prático e direto por ordem de chegada. Venha nos visitar no Del Lago ou
-            consulte a equipe pelo WhatsApp.
+            Sem frescura, sem agendamento. Aparece no Del Lago ou manda mensagem no zap pra saber
+            como tá o movimento.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
             <a
@@ -573,7 +572,7 @@ export function CtaFinal() {
             </a>
             <a
               href={whatsappLink(
-                "Olá, Fabin Barber Shop! Vim pelo site e gostaria de tirar uma dúvida sobre o atendimento.",
+                "Oi! Vi o site de vocês e quero saber como tá o movimento hoje!",
               )}
               target="_blank"
               rel="noopener noreferrer"
