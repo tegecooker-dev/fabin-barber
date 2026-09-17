@@ -62,13 +62,21 @@ function SectionHeading({
 }) {
   return (
     <FadeIn className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <span className="text-eyebrow">{eyebrow}</span>
-      <h2 className="mt-3 font-display text-4xl leading-none text-foreground sm:text-5xl">
+      <div className={`inline-flex items-center gap-2 ${center ? "justify-center" : ""}`}>
+        <span className="size-1 rounded-full bg-gold/70" />
+        <span className="text-eyebrow">{eyebrow}</span>
+        <span className="size-1 rounded-full bg-gold/70" />
+      </div>
+      <h2 className="mt-3 font-display text-4xl tracking-tight text-foreground sm:text-5xl">
         {title}
       </h2>
-      <div className={`gold-rule mt-5 h-px w-24 ${center ? "mx-auto" : ""}`} />
+      <div className={`mt-4 flex items-center gap-3 ${center ? "justify-center" : ""}`}>
+        <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold/60" />
+        <span className="text-[0.65rem] text-gold/80">◆</span>
+        <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold/60" />
+      </div>
       {subtitle ? (
-        <p className="mt-5 text-base leading-relaxed text-muted-foreground">{subtitle}</p>
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground">{subtitle}</p>
       ) : null}
     </FadeIn>
   );
@@ -181,19 +189,21 @@ export function Sobre() {
     <section id="sobre" className="bg-graphite/40 py-20 sm:py-28">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-2 lg:gap-16">
         <FadeIn>
-          <div className="relative">
-            <img
-              src={g5}
-              alt="Ambiente aconchegante da Fabin Barber Shop"
-              width={900}
-              height={900}
-              loading="lazy"
-              decoding="async"
-              className="aspect-[4/5] w-full object-cover"
-            />
-            <div className="absolute -bottom-6 -right-2 border border-gold/50 bg-ink px-6 py-4 text-center sm:right-6">
-              <p className="font-display text-3xl text-gold">2022</p>
-              <p className="text-[0.6rem] uppercase tracking-[0.28em] text-muted-foreground">
+          <div className="relative group">
+            <div className="overflow-hidden border border-gold/30 bg-graphite shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
+              <img
+                src={g5}
+                alt="Ambiente aconchegante da Fabin Barber Shop"
+                width={900}
+                height={900}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="absolute -bottom-5 -right-2 border border-gold/60 bg-ink/95 backdrop-blur-md px-6 py-3.5 text-center shadow-[0_8px_24px_rgba(0,0,0,0.7)] sm:right-6">
+              <p className="font-display text-3xl tracking-wide text-gold">2022</p>
+              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-copper">
                 Since
               </p>
             </div>
@@ -225,9 +235,12 @@ export function Sobre() {
                 "Produtos de qualidade",
                 "Climatizado e confortável",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-foreground">
-                  <span className="mt-1.5 size-1.5 shrink-0 bg-gold" />
-                  {item}
+                <li
+                  key={item}
+                  className="flex items-center gap-3 border border-border/50 bg-card/40 backdrop-blur-sm px-4 py-3 text-sm text-foreground/90 transition-all hover:border-gold/40 hover:bg-card/70"
+                >
+                  <span className="size-1.5 shrink-0 bg-gold rotate-45" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -255,19 +268,21 @@ export function Servicos() {
             return (
               <FadeIn key={s.name} delay={i * 60}>
                 <article
-                  className={`relative flex flex-col gap-4 border p-5 sm:p-6 transition-colors sm:flex-row sm:items-center sm:justify-between h-full ${
+                  className={`group relative flex flex-col gap-4 p-5 sm:p-6 sm:flex-row sm:items-center sm:justify-between h-full onyx-glass gold-glow-hover ${
                     isPopular
-                      ? "border-gold/60 bg-gradient-to-br from-card via-card to-gold/5 shadow-[0_0_20px_rgba(212,175,55,0.08)]"
-                      : "border-border/70 bg-card hover:border-gold/60"
+                      ? "border-gold/60 bg-gradient-to-br from-gold/10 via-card/85 to-ink/90 shadow-[0_12px_40px_rgba(212,175,55,0.12)]"
+                      : ""
                   }`}
                 >
                   {isPopular ? (
-                    <span className="absolute -top-3 right-4 bg-gradient-to-r from-gold-soft via-gold to-copper px-2.5 py-0.5 text-[0.6rem] font-bold uppercase tracking-widest text-primary-foreground shadow-sm">
-                      Mais Pedido
+                    <span className="absolute -top-3 right-4 bg-gradient-to-r from-gold-soft via-gold to-copper px-3 py-0.5 text-[0.6rem] font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_12px_rgba(212,175,55,0.3)]">
+                      ★ Mais Pedido
                     </span>
                   ) : null}
                   <div className="min-w-0">
-                    <h3 className="font-display text-2xl leading-none text-foreground">{s.name}</h3>
+                    <h3 className="font-display text-2xl leading-none text-foreground group-hover:text-gold transition-colors duration-300">
+                      {s.name}
+                    </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {s.description}
                     </p>
@@ -276,10 +291,12 @@ export function Servicos() {
                     </p>
                   </div>
                   <div className="flex shrink-0 items-center justify-between border-t border-border/40 pt-3.5 sm:border-0 sm:pt-0 gap-4 sm:flex-col sm:items-end">
-                    <p className="font-display text-3xl text-gold">{s.price}</p>
+                    <p className="font-display text-3xl tracking-wide text-gold transition-transform duration-300 group-hover:scale-105">
+                      {s.price}
+                    </p>
                     <a
                       href="#local"
-                      className="inline-flex items-center gap-1.5 rounded-sm border border-gold/70 px-4 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
+                      className="inline-flex items-center gap-1.5 rounded-sm border border-gold/70 px-4 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-gold transition-all duration-300 hover:bg-gold hover:text-primary-foreground hover:shadow-[0_0_15px_rgba(212,175,55,0.3)]"
                     >
                       <Navigation className="size-3" /> Chegar agora
                     </a>
@@ -330,7 +347,7 @@ export function Galeria() {
           {galleryPhotos.map((p, i) => (
             <FadeIn key={p.alt} delay={i * 55}>
               <figure
-                className={`group relative cursor-pointer overflow-hidden bg-graphite ${
+                className={`group relative cursor-pointer overflow-hidden border border-border/40 bg-graphite transition-all duration-500 hover:border-gold/60 shadow-[0_8px_25px_rgba(0,0,0,0.5)] hover:shadow-[0_12px_35px_rgba(212,175,55,0.15)] ${
                   i === 0 ? "col-span-2 lg:col-span-1" : ""
                 }`}
                 onClick={() => open(i)}
@@ -385,17 +402,27 @@ export function Avaliacoes() {
         <div className="mt-14 grid gap-5 md:grid-cols-2">
           {testimonials.map((t, i) => (
             <FadeIn key={t.name} delay={i * 80}>
-              <blockquote className="relative border border-border/70 bg-card p-7 pt-9 h-full">
-                <Quote className="absolute right-6 top-6 size-8 text-gold/25" />
-                <div className="flex gap-1">
+              <blockquote className="group relative p-6 sm:p-7 pt-9 h-full onyx-glass gold-glow-hover">
+                <Quote className="absolute right-6 top-6 size-8 text-gold/20 transition-all duration-300 group-hover:scale-110 group-hover:text-gold/40" />
+                <div className="flex items-center gap-1.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="size-4 fill-gold text-gold" />
                   ))}
+                  <span className="ml-1 text-xs font-bold text-gold">5.0</span>
                 </div>
-                <p className="mt-4 text-base leading-relaxed text-foreground/90">"{t.text}"</p>
-                <footer className="mt-5 border-t border-border/50 pt-4">
-                  <p className="font-display text-xl tracking-wide text-foreground">{t.name}</p>
-                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-copper">{t.since}</p>
+                <p className="mt-4 font-serif text-lg italic leading-relaxed text-foreground/95">
+                  "{t.text}"
+                </p>
+                <footer className="mt-5 border-t border-border/40 pt-4 flex items-center justify-between">
+                  <div>
+                    <p className="font-display text-xl tracking-wide text-foreground group-hover:text-gold transition-colors duration-300">
+                      {t.name}
+                    </p>
+                    <p className="text-[0.65rem] uppercase tracking-[0.2em] text-copper">{t.since}</p>
+                  </div>
+                  <span className="rounded-full border border-gold/30 bg-gold/5 px-2.5 py-0.5 text-[0.6rem] uppercase tracking-wider text-gold/80">
+                    Cliente Verificado
+                  </span>
                 </footer>
               </blockquote>
             </FadeIn>
@@ -419,7 +446,7 @@ export function Local() {
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
           <FadeIn className="space-y-8">
-            <div className="border border-border/70 bg-card p-5 sm:p-7">
+            <div className="p-5 sm:p-7 onyx-glass">
               <h3 className="flex items-center gap-2 font-display text-2xl tracking-wide text-gold">
                 <MapPin className="size-5" /> ENDEREÇO
               </h3>
@@ -430,7 +457,7 @@ export function Local() {
                   href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold-soft via-gold to-copper px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground transition-opacity hover:opacity-90"
+                  className="inline-flex items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold-soft via-gold to-copper px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.35)]"
                 >
                   <Navigation className="size-4" /> Google Maps
                 </a>
@@ -445,7 +472,7 @@ export function Local() {
               </div>
             </div>
 
-            <div className="border border-gold/40 bg-gold/5 p-5 sm:p-6">
+            <div className="border border-gold/40 bg-gradient-to-br from-gold/15 via-card/80 to-ink/90 backdrop-blur-md p-5 sm:p-6 shadow-[0_8px_30px_rgba(212,175,55,0.08)]">
               <span className="text-eyebrow text-gold">Sem agendamento prévio</span>
               <h4 className="mt-1 font-display text-xl text-foreground">
                 ATENDIMENTO POR ORDEM DE CHEGADA
@@ -455,7 +482,7 @@ export function Local() {
               </p>
             </div>
 
-            <div className="border border-border/70 bg-card p-5 sm:p-7">
+            <div className="p-5 sm:p-7 onyx-glass">
               <h3 className="flex items-center gap-2 font-display text-2xl tracking-wide text-gold">
                 <Clock className="size-5" /> HORÁRIO DE FUNCIONAMENTO
               </h3>
