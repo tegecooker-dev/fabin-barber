@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface LightboxProps {
@@ -17,6 +17,23 @@ export function Lightbox({
   onNext,
 }: LightboxProps) {
   const photo = photos[current];
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    if (diff > 45) {
+      onNext();
+    } else if (diff < -45) {
+      onPrev();
+    }
+    setTouchStart(null);
+  };
 
   // Close on Escape, navigate with arrow keys
   useEffect(() => {
@@ -60,14 +77,16 @@ export function Lightbox({
           e.stopPropagation();
           onPrev();
         }}
-        className="absolute left-3 top-1/2 z-10 -translate-y-1/2 grid size-10 place-items-center rounded-sm border border-border bg-card text-foreground transition-colors hover:border-gold hover:text-gold sm:left-6"
+        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 grid size-10 place-items-center rounded-sm border border-border bg-card text-foreground transition-colors hover:border-gold hover:text-gold sm:left-6"
       >
         <ChevronLeft className="size-6" />
       </button>
 
-      {/* Image */}
+      {/* Image with touch swipe */}
       <div
-        className="relative mx-16 max-h-[88vh] max-w-4xl"
+        className="relative mx-3 sm:mx-16 max-h-[88vh] max-w-4xl select-none"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         onClick={(e) => e.stopPropagation()}
       >
         <img

@@ -250,30 +250,44 @@ export function Servicos() {
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {services.map((s, i) => (
-            <FadeIn key={s.name} delay={i * 60}>
-              <article className="flex flex-col gap-4 border border-border/70 bg-card p-5 sm:p-6 transition-colors hover:border-gold/60 sm:flex-row sm:items-center sm:justify-between h-full">
-                <div className="min-w-0">
-                  <h3 className="font-display text-2xl leading-none text-foreground">{s.name}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {s.description}
-                  </p>
-                  <p className="mt-3 flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-copper">
-                    <Clock className="size-3.5" /> {s.duration}
-                  </p>
-                </div>
-                <div className="flex shrink-0 items-center justify-between border-t border-border/40 pt-3.5 sm:border-0 sm:pt-0 gap-4 sm:flex-col sm:items-end">
-                  <p className="font-display text-3xl text-gold">{s.price}</p>
-                  <a
-                    href="#local"
-                    className="inline-flex items-center gap-1.5 rounded-sm border border-gold/70 px-4 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
-                  >
-                    <Navigation className="size-3" /> Chegar agora
-                  </a>
-                </div>
-              </article>
-            </FadeIn>
-          ))}
+          {services.map((s, i) => {
+            const isPopular = s.name === "Corte + Barba";
+            return (
+              <FadeIn key={s.name} delay={i * 60}>
+                <article
+                  className={`relative flex flex-col gap-4 border p-5 sm:p-6 transition-colors sm:flex-row sm:items-center sm:justify-between h-full ${
+                    isPopular
+                      ? "border-gold/60 bg-gradient-to-br from-card via-card to-gold/5 shadow-[0_0_20px_rgba(212,175,55,0.08)]"
+                      : "border-border/70 bg-card hover:border-gold/60"
+                  }`}
+                >
+                  {isPopular ? (
+                    <span className="absolute -top-3 right-4 bg-gradient-to-r from-gold-soft via-gold to-copper px-2.5 py-0.5 text-[0.6rem] font-bold uppercase tracking-widest text-primary-foreground shadow-sm">
+                      Mais Pedido
+                    </span>
+                  ) : null}
+                  <div className="min-w-0">
+                    <h3 className="font-display text-2xl leading-none text-foreground">{s.name}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {s.description}
+                    </p>
+                    <p className="mt-3 flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-copper">
+                      <Clock className="size-3.5" /> {s.duration}
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 items-center justify-between border-t border-border/40 pt-3.5 sm:border-0 sm:pt-0 gap-4 sm:flex-col sm:items-end">
+                    <p className="font-display text-3xl text-gold">{s.price}</p>
+                    <a
+                      href="#local"
+                      className="inline-flex items-center gap-1.5 rounded-sm border border-gold/70 px-4 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
+                    >
+                      <Navigation className="size-3" /> Chegar agora
+                    </a>
+                  </div>
+                </article>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -411,14 +425,24 @@ export function Local() {
               </h3>
               <p className="mt-3 text-base text-foreground">{ADDRESS}</p>
               <p className="text-sm text-muted-foreground">Brasília — DF · CEP 71591-465</p>
-              <a
-                href={MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold-soft via-gold to-copper px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground transition-opacity hover:opacity-90"
-              >
-                <Navigation className="size-4" /> Como chegar no Google Maps
-              </a>
+              <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
+                <a
+                  href={MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold-soft via-gold to-copper px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  <Navigation className="size-4" /> Google Maps
+                </a>
+                <a
+                  href="https://waze.com/ul?q=Del+Lago+II+Q+59+FABIN+BARBER+SHOP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-sm border border-border px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-gold hover:text-gold"
+                >
+                  Abrir no Waze
+                </a>
+              </div>
             </div>
 
             <div className="border border-gold/40 bg-gold/5 p-5 sm:p-6">

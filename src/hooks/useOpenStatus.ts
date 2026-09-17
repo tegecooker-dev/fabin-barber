@@ -4,9 +4,40 @@ type OpenStatus =
   | { open: true; closesAt: string }
   | { open: false; opensAt: string | null };
 
+function getBrasiliaDate(date: Date = new Date()): { day: number; h: number; m: number } {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Sao_Paulo",
+    hour12: false,
+    weekday: "short",
+    hour: "numeric",
+    minute: "numeric",
+  });
+
+  const parts = formatter.formatToParts(date);
+  const weekday = parts.find((p) => p.type === "weekday")?.value ?? "";
+  const hour = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10);
+  const minute = parseInt(parts.find((p) => p.type === "minute")?.value ?? "0", 10);
+
+  const daysMap: Record<string, number> = {
+    Sun: 0,
+    Mon: 1,
+    Tue: 2,
+    Wed: 3,
+    Thu: 4,
+    Fri: 5,
+    Sat: 6,
+  };
+
+  return {
+    day: daysMap[weekday] ?? 0,
+    h: hour,
+    m: minute,
+  };
+}
+
 /**
  * Returns real-time open/closed status based on Fabin's business hours.
- * Updates every minute so the badge reflects changes without page reload.
+ * Automatically synchronizes with Brasília timezone (America/Sao_Paulo).
  *
  * Schedule:
  *  Monday          → Closed
@@ -14,10 +45,8 @@ type OpenStatus =
  *  Saturday        → 08:00–19:00
  *  Sunday          → 08:00–13:00
  */
-function computeStatus(now: Date): OpenStatus {
-  const day = now.getDay(); // 0=Sun,1=Mon,...,6=Sat
-  const h = now.getHours();
-  const m = now.getMinutes();
+function computeStatus(now: Date = new Date()): OpenStatus {
+  const { day, h, m } = getBrasiliaDate(now);
   const minutes = h * 60 + m;
 
   // Monday — always closed
