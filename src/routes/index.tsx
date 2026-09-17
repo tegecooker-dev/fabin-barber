@@ -10,13 +10,12 @@ import {
   Local,
   Servicos,
   Sobre,
-  Time,
 } from "@/components/site/sections";
 import { SplashScreen } from "@/components/site/SplashScreen";
 
 const title = "Fabin Barber Shop | Barbearia no Del Lago (Ordem de Chegada)";
 const description =
-  "Barbearia premium no Del Lago desde 2022. Atendimento rápido por ordem de chegada. Cortes, degradê navalhado e barba na navalha com Fábio e Vitinho.";
+  "Barbearia premium no Del Lago desde 2022. Atendimento rápido por ordem de chegada. Cortes, degradê navalhado e barba na navalha com profissionais qualificados.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -95,7 +94,6 @@ function Index() {
       <main>
         <Hero />
         <Sobre />
-        <Time />
         <Servicos />
         <Galeria />
         <Avaliacoes />

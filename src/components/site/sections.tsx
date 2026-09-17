@@ -3,8 +3,6 @@ import { Clock, MapPin, Navigation, Quote, Star, Expand } from "lucide-react";
 
 import heroImg from "@/assets/hero.jpg";
 import heroVideo from "@/assets/snapinsta-1789008038249.mp4";
-import fabioImg from "@/assets/barber-fabio.jpg";
-import vitinhoImg from "@/assets/barber-vitinho.jpg";
 import g1 from "@/assets/gallery-1.jpg";
 import g2 from "@/assets/gallery-2.jpg";
 import g3 from "@/assets/gallery-3.jpg";
@@ -19,14 +17,11 @@ import {
   ADDRESS,
   MAPS_EMBED,
   MAPS_URL,
-  barbers,
   hours,
   services,
   testimonials,
   whatsappLink,
 } from "@/lib/fabin";
-
-const barberImages: Record<string, string> = { fabio: fabioImg, vitinho: vitinhoImg };
 
 // ─── Fade-in wrapper ────────────────────────────────────────────────────────
 function FadeIn({
@@ -208,7 +203,7 @@ export function Sobre() {
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {[
                 "Sem agendamento prévio",
-                "Fábio & Vitinho no comando",
+                "Profissionais experientes no comando",
                 "Produtos de qualidade",
                 "Climatizado e confortável",
               ].map((item) => (
@@ -220,96 +215,6 @@ export function Sobre() {
             </ul>
           </div>
         </FadeIn>
-      </div>
-    </section>
-  );
-}
-
-// ─── Time ────────────────────────────────────────────────────────────────────
-// Apenas barbeiros reais — sem card placeholder
-const activeBarbers = barbers.filter((b) => !b.placeholder);
-
-export function Time() {
-  return (
-    <section id="time" className="py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-5">
-        <SectionHeading
-          eyebrow="O time"
-          title="QUEM FAZ ACONTECER"
-          subtitle="Dois barbeiros, um padrão: não sai daqui feio. Chega e escolhe com quem prefere."
-        />
-
-        {/* 2 colunas centradas para os 2 barbeiros */}
-        <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:max-w-3xl lg:mx-auto">
-          {activeBarbers.map((b, i) => (
-            <FadeIn key={b.id} delay={i * 100}>
-              <article
-                className={`group flex flex-col border bg-card h-full ${
-                  b.id === "fabio" ? "border-gold/50" : "border-border/70"
-                }`}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden bg-graphite">
-                  <img
-                    src={barberImages[b.id]}
-                    alt={`${b.name}, barbeiro da Fabin Barber Shop`}
-                    width={912}
-                    height={1104}
-                    loading="lazy"
-                    decoding="async"
-                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {b.id === "fabio" ? (
-                    <span className="absolute left-4 top-4 bg-gradient-to-r from-gold-soft via-gold to-copper px-3 py-1 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-                      Proprietário
-                    </span>
-                  ) : null}
-                </div>
-
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-3xl leading-none text-foreground">{b.name}</h3>
-                  <p className="mt-1.5 text-[0.68rem] uppercase tracking-[0.2em] text-copper">
-                    {b.role}
-                  </p>
-
-                  {b.stars ? (
-                    <div className="mt-3 flex items-center gap-1">
-                      {Array.from({ length: b.stars }).map((_, i) => (
-                        <Star key={i} className="size-4 fill-gold text-gold" />
-                      ))}
-                      <span className="ml-2 text-xs text-muted-foreground">5.0</span>
-                    </div>
-                  ) : null}
-
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{b.bio}</p>
-
-                  {b.specialties.length ? (
-                    <ul className="mt-4 flex flex-wrap gap-2">
-                      {b.specialties.map((s) => (
-                        <li
-                          key={s}
-                          className="border border-border/70 px-2.5 py-1 text-[0.65rem] uppercase tracking-[0.12em] text-muted-foreground"
-                        >
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-
-                  <a
-                    href={whatsappLink(
-                      `Olá, ${b.name}! Vim pelo site da Fabin Barber Shop e gostaria de saber se você está atendendo hoje na barbearia.`,
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-sm bg-whats py-3 text-xs font-semibold uppercase tracking-[0.18em] text-whats-foreground transition-opacity hover:opacity-90"
-                  >
-                    <WhatsAppIcon className="size-4" /> Falar com {b.name}
-                  </a>
-                </div>
-              </article>
-            </FadeIn>
-          ))}
-        </div>
       </div>
     </section>
   );

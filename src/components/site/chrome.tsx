@@ -13,7 +13,6 @@ import logoPng from "@/assets/logo.png";
 
 const navLinks = [
   { href: "#sobre", label: "Sobre" },
-  { href: "#time", label: "Time" },
   { href: "#servicos", label: "Serviços" },
   { href: "#galeria", label: "Galeria" },
   { href: "#avaliacoes", label: "Avaliações" },
