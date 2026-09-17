@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Clock, MapPin, Navigation, Quote, Star, Expand } from "lucide-react";
 
 import heroImg from "@/assets/hero.jpg";
-import heroVideo from "@/assets/snapinsta-1789008038249.mp4";
+import heroVideo from "@/assets/hero-video-opt.mp4";
 import g1 from "@/assets/gallery-1.jpg";
 import g2 from "@/assets/gallery-2.jpg";
 import g3 from "@/assets/gallery-3.jpg";
@@ -76,53 +76,71 @@ function SectionHeading({
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.defaultMuted = true;
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay prevented by browser, background image is seamlessly displayed
+        });
+      }
+    }
+  }, []);
+
   return (
     <section id="top" className="relative isolate min-h-[100svh] overflow-hidden">
-      {/* Vídeo de fundo em loop silencioso com carregamento otimizado */}
+      {/* Imagem de fundo instantânea (garante visual imediato sem tela preta no celular) */}
+      <img
+        src={heroImg}
+        alt="Interior da Fabin Barber Shop"
+        width={1280}
+        height={720}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 size-full object-cover"
+      />
+
+      {/* Vídeo otimizado em loop silencioso */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         poster={heroImg}
         aria-hidden="true"
         className="absolute inset-0 size-full object-cover"
       >
         <source src={heroVideo} type="video/mp4" />
-        {/* Fallback para browsers sem suporte a vídeo */}
-        <img
-          src={heroImg}
-          alt="Interior da Fabin Barber Shop"
-          width={1280}
-          height={720}
-          fetchPriority="high"
-          decoding="async"
-          className="absolute inset-0 size-full object-cover"
-        />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/65 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/75 to-ink" />
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pb-20 pt-32">
+      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-4 sm:px-5 pb-16 sm:pb-20 pt-28 sm:pt-32">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-eyebrow">Del Lago · Itapoã</span>
           <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-widest text-gold">
             Sem agendamento
           </span>
         </div>
-        <h1 className="mt-5 max-w-3xl font-display text-[3.25rem] leading-[0.92] text-foreground sm:text-7xl lg:text-8xl">
+        <h1 className="mt-4 sm:mt-5 max-w-3xl font-display text-[2.75rem] leading-[0.95] text-foreground sm:text-7xl lg:text-8xl break-words">
           CABELO BOM
           <span className="gold-text block">NÃO ESPERA.</span>
         </h1>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+        <p className="mt-5 sm:mt-6 max-w-xl text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
           Sem agenda, sem app. Você chega, escolhe seu barbeiro e senta na cadeira.
           Fabin Barber no Del Lago — desde 2022 do mesmo jeito: serviço de qualidade e sem enrolação.
         </p>
 
-        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-8 sm:mt-9 flex flex-col gap-3 sm:flex-row">
           <a
             href="#local"
-            className="inline-flex items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold-soft via-gold to-copper px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold-soft via-gold to-copper px-6 sm:px-7 py-3.5 sm:py-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground transition-opacity hover:opacity-90"
           >
             <Navigation className="size-4" /> Ver no Maps
           </a>
@@ -132,21 +150,21 @@ export function Hero() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-sm border border-border px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition-colors hover:border-gold hover:text-gold"
+            className="inline-flex items-center justify-center gap-2 rounded-sm border border-border px-6 sm:px-7 py-3.5 sm:py-4 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition-colors hover:border-gold hover:text-gold"
           >
             <WhatsAppIcon className="size-4" /> Ver movimento no Zap
           </a>
         </div>
 
-        <dl className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border/60 pt-6">
+        <dl className="mt-10 sm:mt-14 grid max-w-lg grid-cols-3 gap-2 sm:gap-6 border-t border-border/60 pt-5 sm:pt-6">
           {[
             { k: "+3", v: "anos de estrada" },
             { k: "5.0", v: "nota dos clientes" },
             { k: "100%", v: "ordem de chegada" },
           ].map((s) => (
-            <div key={s.v}>
-              <dt className="font-display text-3xl text-gold">{s.k}</dt>
-              <dd className="mt-1 text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">
+            <div key={s.v} className="min-w-0">
+              <dt className="font-display text-2xl sm:text-3xl text-gold">{s.k}</dt>
+              <dd className="mt-1 text-[0.62rem] sm:text-[0.7rem] uppercase tracking-wider sm:tracking-[0.16em] text-muted-foreground break-words">
                 {s.v}
               </dd>
             </div>
@@ -234,7 +252,7 @@ export function Servicos() {
         <div className="mt-14 grid gap-5 md:grid-cols-2">
           {services.map((s, i) => (
             <FadeIn key={s.name} delay={i * 60}>
-              <article className="flex flex-col gap-4 border border-border/70 bg-card p-6 transition-colors hover:border-gold/60 sm:flex-row sm:items-center sm:justify-between h-full">
+              <article className="flex flex-col gap-4 border border-border/70 bg-card p-5 sm:p-6 transition-colors hover:border-gold/60 sm:flex-row sm:items-center sm:justify-between h-full">
                 <div className="min-w-0">
                   <h3 className="font-display text-2xl leading-none text-foreground">{s.name}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -244,7 +262,7 @@ export function Servicos() {
                     <Clock className="size-3.5" /> {s.duration}
                   </p>
                 </div>
-                <div className="flex shrink-0 items-center justify-between gap-4 sm:flex-col sm:items-end">
+                <div className="flex shrink-0 items-center justify-between border-t border-border/40 pt-3.5 sm:border-0 sm:pt-0 gap-4 sm:flex-col sm:items-end">
                   <p className="font-display text-3xl text-gold">{s.price}</p>
                   <a
                     href="#local"
@@ -387,7 +405,7 @@ export function Local() {
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
           <FadeIn className="space-y-8">
-            <div className="border border-border/70 bg-card p-7">
+            <div className="border border-border/70 bg-card p-5 sm:p-7">
               <h3 className="flex items-center gap-2 font-display text-2xl tracking-wide text-gold">
                 <MapPin className="size-5" /> ENDEREÇO
               </h3>
@@ -403,7 +421,7 @@ export function Local() {
               </a>
             </div>
 
-            <div className="border border-gold/40 bg-gold/5 p-6">
+            <div className="border border-gold/40 bg-gold/5 p-5 sm:p-6">
               <span className="text-eyebrow text-gold">Sem agendamento prévio</span>
               <h4 className="mt-1 font-display text-xl text-foreground">
                 ATENDIMENTO POR ORDEM DE CHEGADA
@@ -413,7 +431,7 @@ export function Local() {
               </p>
             </div>
 
-            <div className="border border-border/70 bg-card p-7">
+            <div className="border border-border/70 bg-card p-5 sm:p-7">
               <h3 className="flex items-center gap-2 font-display text-2xl tracking-wide text-gold">
                 <Clock className="size-5" /> HORÁRIO DE FUNCIONAMENTO
               </h3>

@@ -35,30 +35,30 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-ink/95 backdrop-blur-md shadow-lg transition-colors">
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3 lg:flex lg:justify-between">
-        <a href="#top" className="flex min-w-0 items-center gap-3">
+        <a href="#top" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
           <img
             src={logoPng}
             alt="Logo Fabin Barber Shop"
             width={44}
             height={44}
             decoding="async"
-            className="size-11 rounded-full object-cover border border-gold/60 bg-ink shadow-[0_0_12px_rgba(212,175,55,0.25)]"
+            className="size-10 sm:size-11 shrink-0 rounded-full object-cover border border-gold/60 bg-ink shadow-[0_0_12px_rgba(212,175,55,0.25)]"
           />
-          <span className="min-w-0 leading-none">
-            <span className="block truncate font-display text-xl tracking-[0.14em] text-foreground">
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-display text-lg sm:text-xl tracking-[0.14em] text-foreground">
               FABIN BARBER SHOP
             </span>
-            <span className="flex items-center gap-2">
+            <span className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <span className="text-[0.6rem] font-semibold uppercase tracking-[0.34em] text-copper">
                 Since 2022
               </span>
               {status.open ? (
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-950/60 px-2 py-0.5 text-[0.58rem] font-bold uppercase tracking-widest text-emerald-400">
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-950/60 px-2 py-0.5 text-[0.58rem] font-bold uppercase tracking-widest text-emerald-400 whitespace-nowrap">
                   <span className="size-1.5 rounded-full bg-emerald-400" />
                   Aberto · fecha {status.closesAt}
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 rounded-full bg-red-950/60 px-2 py-0.5 text-[0.58rem] font-bold uppercase tracking-widest text-red-400">
+                <span className="inline-flex items-center gap-1 rounded-full bg-red-950/60 px-2 py-0.5 text-[0.58rem] font-bold uppercase tracking-widest text-red-400 whitespace-nowrap">
                   <span className="size-1.5 rounded-full bg-red-400" />
                   {status.opensAt ? `Abre ${status.opensAt}` : "Fechado"}
                 </span>

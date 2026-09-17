@@ -28,12 +28,12 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const t1 = setTimeout(() => setPhase("cutting"), 1700);
+    const t1 = setTimeout(() => setPhase("cutting"), 1100);
     const t2 = setTimeout(() => {
       setPhase("done");
       document.body.style.overflow = prev;
       onComplete();
-    }, 2650);
+    }, 1850);
 
     return () => {
       clearTimeout(t1);
